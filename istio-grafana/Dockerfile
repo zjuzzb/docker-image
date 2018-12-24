@@ -1,1 +1,1 @@
-FROM gcr.io/istio-release/grafana:1.0.2
+FROM gcr.io/istio-release/grafana:1.0.5
