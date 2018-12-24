@@ -1,1 +1,1 @@
-FROM gcr.io/istio-release/servicegraph:1.0.5
+FROM docker.io/istio/servicegraph:1.0.5

@@ -1,1 +1,1 @@
-FROM gcr.io/istio-release/galley:1.0.5
+FROM docker.io/istio/galley:1.0.5

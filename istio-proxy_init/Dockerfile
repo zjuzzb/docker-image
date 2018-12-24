@@ -1,1 +1,1 @@
-FROM gcr.io/istio-release/proxy_init:1.0.5
+FROM docker.io/istio/proxy_init:1.0.5

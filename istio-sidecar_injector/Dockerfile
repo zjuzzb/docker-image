@@ -1,1 +1,1 @@
-FROM gcr.io/istio-release/sidecar_injector:1.0.5
+FROM docker.io/istio/sidecar_injector:1.0.5

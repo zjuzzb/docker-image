@@ -1,1 +1,1 @@
-FROM gcr.io/istio-release/pilot:1.0.5
+FROM docker.io/istio/pilot:1.0.5

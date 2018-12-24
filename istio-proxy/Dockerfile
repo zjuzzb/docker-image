@@ -1,1 +1,1 @@
-FROM gcr.io/istio-release/proxyv2:1.0.5
+FROM docker.io/istio/proxyv2:1.0.5

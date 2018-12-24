@@ -1,1 +1,1 @@
-FROM gcr.io/istio-release/mixer:1.0.5
+FROM docker.io/istio/mixer:1.0.5
