@@ -1,0 +1,1 @@
+docker build -t hcipam:v0.1 .

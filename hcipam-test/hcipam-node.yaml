@@ -1,0 +1,73 @@
+kind: DaemonSet
+apiVersion: extensions/v1beta1
+metadata:
+  name: hcipam-node
+  namespace: kube-system
+  labels:
+    k8s-app: hcipam-node
+spec:
+  selector:
+    matchLabels:
+      k8s-app: hcipam-node
+  template:
+    metadata:
+      labels:
+        k8s-app: hcipam-node
+    spec:
+      hostNetwork: true
+      tolerations:
+        # Make sure calico/node gets scheduled on all nodes.
+        - effect: NoSchedule
+          operator: Exists
+      serviceAccountName: hcipam
+      containers:
+        # This container installs the Calico CNI binaries
+        # and CNI network config file on each node.
+        - name: install-cni
+          image: hcipam:v0.1
+          command: ["sh"]
+          args: ["install-cni.sh"]
+          volumeMounts:
+            - mountPath: /host/etc/cni/net.d
+              name: cni-net-dir
+      volumes:
+        - name: cni-net-dir
+          hostPath:
+            path: /etc/cni/net.d
+
+---
+
+apiVersion: rbac.authorization.k8s.io/v1beta1
+kind: ClusterRoleBinding
+metadata:
+  name: hcipam-rolebinding
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: hcipam-role
+subjects:
+- kind: ServiceAccount
+  name: hcipam
+  namespace: kube-system
+
+---
+
+kind: ClusterRole
+apiVersion: rbac.authorization.k8s.io/v1beta1
+metadata:
+  name: hcipam-role
+rules:
+  - apiGroups: [""]
+    resources:
+      - pods
+      - nodes
+    verbs:
+      - get
+
+---
+
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: hcipam
+  namespace: kube-system
