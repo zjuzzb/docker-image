@@ -24,7 +24,7 @@ spec:
         # This container installs the Calico CNI binaries
         # and CNI network config file on each node.
         - name: install-cni
-          image: hcipam:v0.1
+          image: zjuzzb/hcipam-test
           command: ["sh"]
           args: ["install-cni.sh"]
           volumeMounts:
